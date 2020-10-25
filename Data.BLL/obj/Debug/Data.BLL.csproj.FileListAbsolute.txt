@@ -1,0 +1,17 @@
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\Data.BLL.dll.config
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\Data.BLL.dll
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\Data.BLL.pdb
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\Data.DAL.dll
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\Data.Model.dll
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\EntityFramework.dll
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\System.Linq.Dynamic.dll
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\PagedList.dll
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\Data.DAL.pdb
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\Data.Model.pdb
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\EntityFramework.xml
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\bin\Debug\PagedList.xml
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\obj\Debug\Data.BLL.csprojResolveAssemblyReference.cache
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\obj\Debug\Data.BLL.dll
+C:\Users\aristor\Desktop\ticket\Ticket\Data.BLL\obj\Debug\Data.BLL.pdb

@@ -1,0 +1,10 @@
+C:\Users\aristor\Desktop\ticket\Ticket\Data.Model\bin\Debug\Data.Model.dll.config
+C:\Users\aristor\Desktop\ticket\Ticket\Data.Model\bin\Debug\Data.Model.dll
+C:\Users\aristor\Desktop\ticket\Ticket\Data.Model\bin\Debug\Data.Model.pdb
+C:\Users\aristor\Desktop\ticket\Ticket\Data.Model\bin\Debug\EntityFramework.dll
+C:\Users\aristor\Desktop\ticket\Ticket\Data.Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\aristor\Desktop\ticket\Ticket\Data.Model\bin\Debug\EntityFramework.xml
+C:\Users\aristor\Desktop\ticket\Ticket\Data.Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\aristor\Desktop\ticket\Ticket\Data.Model\obj\Debug\Data.Model.csprojResolveAssemblyReference.cache
+C:\Users\aristor\Desktop\ticket\Ticket\Data.Model\obj\Debug\Data.Model.dll
+C:\Users\aristor\Desktop\ticket\Ticket\Data.Model\obj\Debug\Data.Model.pdb

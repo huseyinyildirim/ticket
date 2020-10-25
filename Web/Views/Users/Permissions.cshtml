@@ -1,0 +1,105 @@
+﻿@using Data.BLL
+@using Data.Model
+@model Web.Controllers.UsersController.MODEL_USERS_PERMISSIONS_Index
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Kullanıcının Yetkileri";
+
+    var userGroups = Model.TBL_USER_PERMISSION.Where(w => !w.USERGROUP_ID.Equals(null)).ToList();
+    var _excludePermissions = Model.TBL_USER_PERMISSION.Where(w => !w.PERMISSION_ID.Equals(null)).ToList();
+    var excludePermissions = new List<TBL_USER_PERMISSION>();
+    excludePermissions.AddRange(_excludePermissions);
+
+    foreach (var item in _excludePermissions)
+    {
+        var subPerms = item.TBL_PERMISSION.TBL_PERMISSION2;
+        if (subPerms.Any())
+        {
+            excludePermissions.AddRange(subPerms.Select(item2 => new TBL_USER_PERMISSION {USER_ID = item.USER_ID, USERGROUP_ID = item.USERGROUP_ID, PERMISSION_ID = item2.ID}));
+        }
+    }
+
+}
+
+<div class="noteArea w100 mb10px">
+    <button type="button" class="default right" click="@Url.Action("PermissionsAllDelete", new { USERID = Model.TBL_USER.ID })"><i class="fa fa-expand"></i>&nbsp;Bütün Yetkileri Kaldır</button>
+
+    @using (Html.BeginForm("UserGroupAdd", "Users", FormMethod.Post, new { @class = "usergroupAddForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <table>
+            <tr>
+                <td>
+                    @Html.Editor("permissionId", "_Combobox", new { node = Enum_Combobox.UserGroups, style = "width:130px;", selected = 1 })
+                    @Html.Hidden("USERID", Model.TBL_USER.ID)
+                </td>
+                <td>
+                    <button class="default" type="submit"><i class="fa fa-save left fa-2x"></i>Ekle</button>
+                </td>
+            </tr>
+        </table>
+    }
+
+
+    <img src="@Url.RouteUrl("Image", new {url = Model.TBL_USER.IMAGE, w = 50, h = 50} )" alt="" class="left mr10px avatar" />
+    <h3 class="mb4px">@(Model.TBL_USER.NAME + " " + Model.TBL_USER.SURNAME) @Html.Raw(Model.TBL_USER.ACTIVE ? "<i title='Sisteme erişimi Aktif.' class='fa fa-circle green activiteState'></i>" : "<i title='Sisteme erişimi Pasif.' class='fa fa-circle gray activiteState'></i>") </h3>
+    @Model.TBL_USER.ADDED_DATETIME tarihinde kaydedildi.
+</div>
+
+
+
+@{
+
+    if (userGroups.Any())
+    {
+
+        foreach (var userGroup in userGroups)
+        {
+            <text>
+                <div class="object w100 mb10px notSelect">
+                    <h2>@(userGroup.TBL_USERGROUP.NAME) grubundan alınan yetkiler <a href="@Url.Action("PermissionUsergroupDelete", new {id = userGroup.ID, USERID = Model.TBL_USER.ID})" class="delete iconlink" title="Bu yetki grubunu kaldır."><i class="fa fa-times"></i></a></h2>
+                    @{
+                        var userGroupPermissions = new BLLUserGroupPermission().Search(userGroup.USERGROUP_ID);
+                        foreach (var userGroupPermission in userGroupPermissions)
+                        {
+
+                            var permissions = userGroupPermission.TBL_PERMISSION.TBL_PERMISSION2;
+                            var _permState1 = excludePermissions.All(a => a.PERMISSION_ID != userGroupPermission.PERMISSION_ID);
+                            <text>
+                                <div class="left ml10px mb10px permListBox">
+                                    <h3>[@(userGroupPermission.TBL_PERMISSION.NAME)]</h3>
+
+                                    @{
+                                        foreach (var perms in permissions)
+                                        {
+                                            var subPermissions = perms.TBL_PERMISSION2;
+                                            var _permState2 = excludePermissions.All(a => a.PERMISSION_ID != perms.ID);
+                                            <text>
+                                                <h3 data='{"permId" : @(perms.ID), "userId" : @(Model.TBL_USER.ID)}' class="permTitle @(_permState2 ? "" : "disable")">@(perms.NAME)</h3>
+                                                @{
+                                                    foreach (var subPerms in subPermissions)
+                                                    {
+                                                        var _permState3 = excludePermissions.All(a => a.PERMISSION_ID != subPerms.ID);
+                                                        <text>
+                                                            <p data='{"permId" : @(subPerms.ID), "userId" : @(Model.TBL_USER.ID)}' class="permItem @(_permState3 ? "" : "disable")"><i class="fa fa-level-up fa-rotate-90"></i> @(subPerms.NAME)</p>
+                                                        </text>
+                                                    }
+                                                }
+                                            </text>
+                                        }
+                                    }
+                                </div>
+                            </text>
+                        }
+                    }
+                </div>
+            </text>
+        }
+    }
+    else
+    {
+        <text>
+            <div class="static-no-record mt20px"><span>Atanmış bir yetki grubu bulunamadı</span></div>
+        </text>
+    }
+}

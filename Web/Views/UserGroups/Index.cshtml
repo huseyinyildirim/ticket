@@ -1,0 +1,77 @@
+﻿@using Data.Model
+@using Web.Lib
+@model Web.Controllers.UserGroupsController.MODEL_USERGROUPS_Index
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Kullanıcı Grupları";
+    var isEdit = Converting.GetBoolean(ViewBag.IsEdit);
+}
+
+
+<div class="object w100">
+
+    <h2>@(ViewBag.Title)</h2>
+
+    <div class="buttons-area">
+        <button class="default" type="button" form-id="addForm"><i class="fa fa-plus left fa-2x"></i>Yeni Kayıt</button>
+    </div>
+
+    <div class="clear mt10px"></div>
+
+
+    <div id="gridim" class="w100">
+
+        @Html.MyGrid(Model.TBL_USERGROUP, new[]
+        {
+            new WebGridColumn{ ColumnName = "Name", Header = "Grup Adı", Format = @<text>[@(item.CODE)] @(item.NAME)</text>, CanSort = true},
+            new WebGridColumn{ Header = "Kullanıcı Sayısı", Format = @<text>
+            @{
+                                                                             List<TBL_USER_PERMISSION> _item = item.TBL_USER_PERMISSION;
+                                                                             if (_item != null)
+                                                                             {
+                                                                                 @(_item.Count);
+                                                                             }
+            }
+            </text>, Style = "w100px center"},
+            new WebGridColumn{ Header = "İşlem", Format = @<text>
+            <a title="Yetkileri" href="@Url.Action("Permissions", new { id = item.ID })"><i class="fa fa-shield"></i></a>
+            <a title="Düzenle" href="@Url.Action("Index", new { id = item.ID })"><i class="fa fa-pencil"></i></a>
+            <a title="Sil" href="@Url.Action("Delete", new { id = item.ID })"><i class="fa fa-times"></i></a>
+
+            </text>, Style = "setting w90px"}
+
+        }, "gridim")
+
+    </div>
+
+
+
+
+</div>
+
+<div class="addEditFormArea" id="addForm">
+    <i class="close-form fa fa-times-circle" title="Kapat"></i>
+    @{ Html.RenderPartial("Add", Model); }
+</div>
+
+
+
+<div class="addEditFormArea" id="editForm">
+    <i class="close-form fa fa-times-circle" title="Kapat"></i>
+    @{ Html.RenderPartial("Edit", Model); }
+</div>
+
+@section scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @if (isEdit)
+            {
+                <text>
+                    $('#editForm').addClass('open');
+                </text>
+            }
+        });
+    </script>
+
+}

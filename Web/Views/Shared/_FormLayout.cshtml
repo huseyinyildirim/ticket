@@ -1,0 +1,20 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta charset="utf-8" />
+
+        <title>@ViewBag.Title</title>
+
+        @Styles.Render("~/bundles/Style")
+        @Styles.Render("~/bundles/FormStyle")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/Script")
+    </head>
+    <body class="form">
+        
+        @RenderBody()
+
+    </body>
+</html>

@@ -1,0 +1,104 @@
+﻿@using Data.Model
+@{
+    var USER = ViewBag.USER as TBL_USER;
+    var USER_MENU = ViewBag.USER_MENU as List<TBL_PERMISSION>;
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <meta charset="utf-8" />
+
+        <title>@ViewBag.Title</title>
+
+        @Styles.Render("~/bundles/Style")
+        @Styles.Render("~/bundles/FormStyle")
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/Script")
+
+    </head>
+<body>
+    <div class="nav-top">
+
+        <div class="table header">
+            <div class="tr">
+                <div class="td logo_area">
+                    <a class="logo" href="@Url.Action("Index", "CP")"><img src="@Url.Content("~/Content/Images/logo.png")" /></a>
+                </div>
+                <div class="td navigate">
+
+
+                    @if (USER != null)
+                    {
+                        <div class="profile-button">
+                            <img src="@Url.RouteUrl("Image", new {url = USER.IMAGE, w = 25, h = 25})" alt="" /> @(USER.NAME + " " + USER.SURNAME)
+                            <div class="object">
+                                <span class="arrow"></span>
+                                <span class="mt10px"></span>
+                                <a href="javascript:alert('Bu sayfa yapılıyor..');">Profil Bilgileri</a>
+                                <a href="@Url.Action("Exit", "CP")">Çıkış Yap</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="clear"></div>
+
+    <div class="table pt40px">
+
+        <div class="tr">
+            <div class="td nav-left">
+                
+                @if (USER_MENU != null)
+                {
+                    var url = Request.Url.ToString();
+                    <ul class="menu">
+                        @{
+                            foreach (var item in USER_MENU.Where(w => w.PARENT_ID.Equals(null)).OrderBy(o => o.ORDER))
+                            {
+                                var subMenu = USER_MENU.Where(w => w.PARENT_ID == item.ID).OrderBy(o => o.ORDER);
+                                <text>
+                                    <li>
+                                        <span>@item.NAME</span>
+                                        @{
+                                            if (subMenu.Any())
+                                            {
+                                                @Html.Raw("<ul>")
+                                                foreach (var item2 in subMenu)
+                                                {
+                                                    var active = url.Contains(item2.ISMENU_LINK);
+                                                    <text>
+                                                        <li @Html.Raw(active ? "class='active'" : "")><a href="@item2.ISMENU_LINK">@item2.NAME</a></li>
+                                                    </text>
+                                                }
+                                                @Html.Raw("</ul>")
+                                            }
+                                        }
+                                    </li>
+                                </text>
+                            }
+                        }
+                    </ul>
+                }
+
+
+            </div>
+            <div class="td page-content" id="pageContentArea">
+
+                
+                @RenderBody()
+             </div>
+        </div>
+
+    </div>
+
+    @RenderSection("scripts", false)
+
+</body>
+</html>

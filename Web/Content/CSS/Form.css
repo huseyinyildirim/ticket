@@ -1,0 +1,9 @@
+﻿body.form{background-color:#fff;}
+form{padding:8px;}
+form table.form-table td{padding:2px 2px 1px;}
+form table.form-table td.label{background:url(/Content/Images/dotdot.png) no-repeat right top;font-weight:700;min-width:65px;height:22px;padding:2px 9px 2px 8px;}
+form .buttons-area{background-color:#f2f2f2;border-bottom:1px solid #c4cde0;border-top:1px solid #c4cde0;position:relative;text-align:right;width:101.9%;margin:10px 0 0 -13px;padding:5px 13px;}
+body.form form .buttons-area{width: 102.3%;margin: 10px 0 0 -8px;}
+form .form-caption{font-weight:700;font-size:13px;color:#555;border-bottom:1px solid #163680;}
+form .checkbox{display:inline-block;margin-right:5px;line-height:20px;}
+form .checkbox input{float:left;margin:3px 4px 0 0;}

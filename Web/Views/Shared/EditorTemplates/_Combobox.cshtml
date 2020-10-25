@@ -1,0 +1,164 @@
+﻿@using Data.BLL
+@using Data.Model
+@model int?
+@{
+    string style = ViewBag.style;
+    string _class = ViewBag._class;
+    dynamic selected = Model > 0 ? Model : ViewBag.selected;
+    string notSelectedText = ViewBag.SelectedText != null ? ViewBag.SelectedText.ToString() : "Seçiniz";
+    Enum_Combobox node = ViewBag.node;
+    int? tabindex = ViewBag.tabindex;
+    int? parentId = ViewBag.parentId;
+
+    var cbo = new List<SelectListItem>();
+    cbo.Add(new SelectListItem() { Value = "", Text = "" });
+
+    switch (node)
+    {
+        case Enum_Combobox.UserGroups:
+            {
+                var list = new BLLUserGroup().GetAll();
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+
+        case Enum_Combobox.CivilStatus:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.CivilStatus);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.Genders:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.Gender);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.DrivingLicenceTypes:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.DrivingLicenceType);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.YesNo:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.YesNo);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.TrueFalse:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.TrueFalse);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.Blood:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.Blood);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.Brand:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.Brand);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.DrivingType:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.DrivingType);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.MaritalStatus:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.MaritalStatus);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.PersonType:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.PersonType);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.ProjectType:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.ProjectType);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.EducationStatus:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.EducationStatus);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.ParentialType:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.ParentialStatus);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.Users:
+            {
+                var list = new BLLUser().GetAll();
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.Company:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.Company);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.Group:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.Group);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.Sector:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.Sector);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.Region:
+            {
+                var list = new BLLKeyValue().GetKeyvaluesByParentId((int)Enum_Keyvalues.Region);
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.City:
+            {
+                var list = new BLLCity().City();
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+        case Enum_Combobox.County:
+            {
+                if (parentId != null)
+                {
+                    var list = new BLLCity().City(parentId);
+                    cbo.AddRange(list.Select(item => new SelectListItem {Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected)}));
+                }
+            }
+            break;
+        case Enum_Combobox.ContactUser:
+            {
+                var list = new BLLUser().GetAll();
+                cbo.AddRange(list.Select(item => new SelectListItem { Value = item.ID.ToString(), Text = item.NAME, Selected = (item.ID == selected) }));
+            }
+            break;
+    }
+
+    var htmlAttr = new Dictionary<string, object>();
+    htmlAttr.Add("tabindex", tabindex);
+    htmlAttr.Add("style", style);
+    htmlAttr.Add("data-placeholder", notSelectedText);
+    htmlAttr.Add("class", _class);
+
+}
+
+@Html.DropDownList("", cbo, htmlAttr)

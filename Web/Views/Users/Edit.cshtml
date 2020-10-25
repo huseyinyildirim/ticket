@@ -1,0 +1,67 @@
+﻿@using Data.BLL
+@model Web.Controllers.UsersController.MODEL_USERS_Index
+<h2>Kullanıcı Düzenle</h2>
+
+@using (Ajax.BeginForm("Edit", new { id = Model.EDIT_FORM.FORM.ID }, new AjaxOptions { OnBegin = "Form_Begin", OnSuccess = "Form_Success", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }, new { @class="novalidate" }))
+{
+    @Html.AntiForgeryToken()
+
+    <table class="form-table">
+        <tr>
+            <td colspan="2" class="center">
+                <img src="@Url.RouteUrl("Image", new { url = Model.EDIT_FORM.FORM.IMAGE, w = 120, h = 150 })" />
+                <br /><br />
+                @Html.HiddenFor(m => m.EDIT_FORM.FORM.IMAGE)
+            </td>
+        </tr>
+        <tr>
+            <td class="label">
+                @Html.DisplayNameFor(m => m.EDIT_FORM.FORM.NAME)
+                @Html.ValidationMessageFor(m => m.EDIT_FORM.FORM.NAME)
+            </td>
+            <td>
+                @Html.EditorFor(m => m.EDIT_FORM.FORM.NAME)
+            </td>
+        </tr>
+        <tr>
+            <td class="label">
+                @Html.DisplayNameFor(m => m.EDIT_FORM.FORM.SURNAME)
+                @Html.ValidationMessageFor(m => m.EDIT_FORM.FORM.SURNAME)
+            </td>
+            <td>
+                @Html.EditorFor(m => m.EDIT_FORM.FORM.SURNAME)
+            </td>
+        </tr>
+        <tr>
+            <td class="label">
+                @Html.DisplayNameFor(m => m.EDIT_FORM.FORM.EMAIL)
+                @Html.ValidationMessageFor(m => m.EDIT_FORM.FORM.EMAIL)
+            </td>
+            <td>
+                @Html.EditorFor(m => m.EDIT_FORM.FORM.EMAIL)
+            </td>
+        </tr>
+        <tr>
+            <td class="label">
+                @Html.DisplayNameFor(m => m.EDIT_FORM.FORM.USERNAME)
+                @Html.ValidationMessageFor(m => m.EDIT_FORM.FORM.USERNAME)
+            </td>
+            <td>
+                @Html.EditorFor(m => m.EDIT_FORM.FORM.USERNAME)
+            </td>
+        </tr>
+        <tr>
+            <td class="label">
+                @Html.DisplayNameFor(m => m.EDIT_FORM.FORM.PASSWORD)
+                @Html.ValidationMessageFor(m => m.EDIT_FORM.FORM.PASSWORD)
+            </td>
+            <td>
+                @Html.Password("EDIT_FORM.FORM.PASSWORD", "", new { @class = "ignore" })
+            </td>
+        </tr>
+    </table>
+
+    <div class="buttons-area">
+        <button class="default" type="submit"><i class="fa fa-save left fa-2x"></i>Güncelle</button>
+    </div>
+}

@@ -1,0 +1,46 @@
+﻿@model Web.Models.LoginModel
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <title>Giriş</title>
+
+    @Styles.Render("~/bundles/LoginStyle")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/LoginScript")
+</head>
+<body>
+
+
+    <div class="login" id="login">
+        @using (Ajax.BeginForm("Index", new AjaxOptions { OnBegin = "LoginBegin", OnSuccess = "LoginSuccess", InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.GO_BACK)
+
+            <div class="area">
+                <p class="logo"><img src="@Url.Content("~/Content/Images/logo_big.png")"/></p>
+                <p class="desc">Personel ve Öğrenci Taşımacılığı</p>
+                <div class="clear"></div>
+                <div class="form-item">
+                    @Html.TextBoxFor(m => m.USERNAME, new { placeholder = Html.DisplayNameFor(m => m.USERNAME), @class = "username" })
+                    @Html.ValidationMessageFor(m => m.USERNAME)
+                </div>
+                <div class="clear"></div>
+                <div class="form-item">
+                    @Html.PasswordFor(m => m.PASSWORD, new { placeholder = Html.DisplayNameFor(m => m.PASSWORD), @class = "password" })
+                    @Html.ValidationMessageFor(m => m.PASSWORD)
+                </div>
+                <div class="clear"></div>
+                <button type="submit"><img class="loading" src="/Content/Images/mini-loading.gif" alt="" />GİRİŞ YAP</button>
+                <div class="clear"></div>
+            </div>
+        }
+        <div class="footer"><span class="left">© @(DateTime.Now.Year)</span></div>
+    </div>
+
+</body>
+</html>

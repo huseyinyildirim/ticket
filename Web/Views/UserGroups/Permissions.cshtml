@@ -1,0 +1,76 @@
+﻿@model Web.Controllers.UserGroupsController.MODEL_USERGROUP_PERMISSIONS_Index
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Kullanıcı Grubunun Yetkilerini Yönet";
+}
+
+
+<div class="noteArea w100 mb10px">
+    <h3>[@(Model.TBL_USERGROUP.NAME)] grubunun yetkilerini düzenliyorsunuz</h3>
+</div>
+
+<div class="object w100">
+
+    <h2>@(ViewBag.Title)</h2>
+    
+    @using (Html.BeginForm(new { id = Model.TBL_USERGROUP.ID }))
+    {
+        <table>
+            <tr>
+                <td class="vat">
+                    <h3 class="p10px">Kullanılabilir Yetki Havuzu</h3>
+                    <ul class="groupList notSelect">
+
+                        @{
+                            if (Model.TBL_PERMISSION_POOL.Any())
+                            {
+                                foreach (var item in Model.TBL_PERMISSION_POOL)
+                                {
+                                    <text>
+                                        <li><input type="checkbox" name="permissionId" value="@(item.ID)" /> @(item.NAME)</li>
+                                    </text>
+                                }
+                            }
+                            else
+                            {
+                                <text>
+                                    <li class="center">Kullanılabilir yetki yok</li>
+                                </text>
+                            }
+                        }
+                    </ul>
+
+                </td>
+                <td style=" padding: 0 10px;">
+                    @if (Model.TBL_PERMISSION_POOL.Any())
+                    {
+                        <button type="submit" class="default"><i class="fa fa-plus left"></i>EKLE</button>
+                    }
+                </td>
+                <td class="vat">
+                    <h3 class="p10px">Gruptaki Yetkiler</h3>
+                    <ul class="groupList notSelect">
+                        @{
+                            if (Model.TBL_USERGROUP_PERMISSIONS.Any())
+                            {
+                                foreach (var item in Model.TBL_USERGROUP_PERMISSIONS)
+                                {
+                                    <li>@(item.TBL_PERMISSION.NAME) <a class="delete iconlink-gray right" title="Yetkiyi Kaldır" href="@Url.Action("UsergroupPermissionDelete", new { id=item.ID, USERGROUP_ID = item.USERGROUP_ID })"><i class="fa fa-times"></i></a></li>
+                                }
+                            }
+                            else
+                            {
+                                <text>
+                                    <li class="center">Hiç yetki eklenmemiş.<br /><br />Soldan seçim yapın ve ekleyin.</li>
+                                </text>
+                            }
+
+                        }
+                    </ul>
+                </td>
+
+            </tr>
+        </table>
+    }
+
+</div>
